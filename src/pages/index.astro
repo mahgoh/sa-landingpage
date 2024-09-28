@@ -1,13 +1,17 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Eric from '../components/Eric.astro';
-import Anna from '../components/Anna.astro';
-import Join from '../components/Join.astro';
+import Layout from '../layouts/Layout.astro'
+import Header from '../components/Header.astro'
+import Eric from '../components/Eric.astro'
+import Anna from '../components/Anna.astro'
+import Join from '../components/Join.astro'
 ---
 
 <Layout title="Welcome to Astro.">
-  <Header title="HoodFinder" subtitle="Find all relevant information about your future neighborhood quickly and easy." tagline="Easy and Comfortable"/>
+  <Header
+    title="HoodFinder"
+    subtitle="Find all relevant information about your future neighborhood quickly and easy."
+    tagline="Easy and Comfortable"
+  />
 
   <!-- Use these attributes on anchor tags to start hidden decision path. Already used in Anna and Eric component. -->
   <!-- <a class="join" data-path="eric" href="#join">Eric</a> -->
@@ -18,13 +22,13 @@ import Join from '../components/Join.astro';
   <Join />
 </Layout>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-
-  document.querySelectorAll(".join").forEach(el => el.addEventListener("click", (e) => {
-    console.log("Setting path to " + e.target.dataset.path)
-      document.querySelector("form")!.dataset.path = e.target.dataset.path
-  }))
-
-})
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.join').forEach((el) =>
+      el.addEventListener('click', (e) => {
+        console.log('Setting path to ' + e.target.dataset.path)
+        document.querySelector('form').dataset.path = e.target.dataset.path
+      })
+    )
+  })
 </script>
