@@ -43,7 +43,7 @@
 </div>
 
 <script is:inline>
-  document.querySelector('form')?.addEventListener('submit', (e) => {
+  document.querySelector('form')?.addEventListener('submit', async (e) => {
     e.preventDefault()
 
     const email = e.target.elements.email.value
@@ -55,6 +55,20 @@
       postalcode,
       path,
     }
+    try {
+      const response = await fetch('/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, postalcode, path}),
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    console.log(JSON.stringify({ email, postalcode, path }));
     console.log(entry)
   })
 </script>
