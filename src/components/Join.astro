@@ -9,13 +9,15 @@
         We’re Launching Soon – Be the First to Know!
       </h2>
       <p class="mx-auto mt-2 max-w-5xl text-center text-lg leading-8 text-gray-800">
-        <br>
-        Our platform is still in development, but we’re excited to bring it to life soon. 
-        Sign up now to stay informed about our launch, and be among the first to explore neighborhoods with ease. <br>
-        <br>
-        By signing up and sharing the ZIP code of the area you're interested in, you’ll not only secure early access but also help shape the future of our platform. 
-        Your input provides valuable insights that guide our development process, making the app even more tailored to your needs. <br>
-        <br>
+        <br />
+        Our platform is still in development, but we’re excited to bring it to life soon. Sign up now
+        to stay informed about our launch, and be among the first to explore neighborhoods with ease.
+        <br />
+        <br />
+        By signing up and sharing the ZIP code of the area you're interested in, you’ll not only secure
+        early access but also help shape the future of our platform. Your input provides valuable insights
+        that guide our development process, making the app even more tailored to your needs. <br />
+        <br />
         We’re truly thankful for your interest and support. Together, we’re building something special.
       </p>
       <form class="mx-auto mt-10 flex max-w-xl gap-x-4">
@@ -43,7 +45,10 @@
           class="flex-none rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
           >Notify me</button
         >
-        <div id="thank-you-bubble" class="fixed bottom-20 left-1/2 z-10 -translate-x-1/2 rounded-full bg-blue-600 p-4 text-white text-center hidden">
+        <div
+          id="thank-you-bubble"
+          class="fixed bottom-20 left-1/2 z-10 -translate-x-1/2 rounded-full bg-blue-600 p-4 text-white text-center hidden"
+        >
           Thank you! We'll soon get back to you!
         </div>
       </form>
@@ -64,30 +69,26 @@
       postalcode,
       path,
     }
-    try {
-      const response = await fetch('/api/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, postalcode, path}),
-      });
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error('Error:', error);
+    const headers = new Headers()
+    headers.append('Content-Type', 'application/json')
+
+    const requestOptions = {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(entry),
     }
-    console.log(JSON.stringify({ email, postalcode, path }));
-    console.log(entry)
+
+    fetch('https://api.sa.mcs.marcokaufmann.ch/api/collections/signups/records/', requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log('Waitlist joined.')
+
+        const bubble = document.getElementById('thank-you-bubble')
+        bubble.classList.remove('hidden')
+        setTimeout(() => bubble.classList.add('hidden'), 5000)
+      })
+      .catch((error) => console.error(error))
 
     e.target.reset()
-  })
-</script>
-
-<script is:inline>
-  document.querySelector('form')?.addEventListener('submit', (e) => {
-    const bubble = document.getElementById('thank-you-bubble')
-    bubble.classList.remove('hidden')
-    setTimeout(() => bubble.classList.add('hidden'), 5000)
   })
 </script>
