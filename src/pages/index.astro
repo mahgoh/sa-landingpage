@@ -21,14 +21,3 @@ import Join from '../components/Join.astro'
   <Anna />
   <Join />
 </Layout>
-
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.join').forEach((el) =>
-      el.addEventListener('click', (e) => {
-        console.log('Setting path to ' + e.target.dataset.path)
-        document.querySelector('form').dataset.path = e.target.dataset.path
-      })
-    )
-  })
-</script>
