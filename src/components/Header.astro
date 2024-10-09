@@ -123,18 +123,20 @@ const { active } = Astro.props
   </div>
 </header>
 
-<script is:inline>
-  document.querySelector('#mobile-menu-button').addEventListener('click', () => {
-    if (document.querySelector('#mobile-menu').dataset.open === 'false') {
-      document.querySelector('#mobile-menu').dataset.open = 'true'
-      document.querySelector('#mobile-menu').classList.remove('hidden')
-    } else {
-      document.querySelector('#mobile-menu').dataset.open = 'false'
-    }
-  })
+<script>
+  document.addEventListener('astro:page-load', () => {
+    document.querySelector('#mobile-menu-button').addEventListener('click', () => {
+      if (document.querySelector('#mobile-menu').dataset.open === 'false') {
+        document.querySelector('#mobile-menu').dataset.open = 'true'
+        document.querySelector('#mobile-menu').classList.remove('hidden')
+      } else {
+        document.querySelector('#mobile-menu').dataset.open = 'false'
+      }
+    })
 
-  document.querySelector('#mobile-menu-close-button').addEventListener('click', () => {
-    document.querySelector('#mobile-menu').dataset.open = 'false'
-    document.querySelector('#mobile-menu').classList.add('hidden')
+    document.querySelector('#mobile-menu-close-button').addEventListener('click', () => {
+      document.querySelector('#mobile-menu').dataset.open = 'false'
+      document.querySelector('#mobile-menu').classList.add('hidden')
+    })
   })
 </script>
