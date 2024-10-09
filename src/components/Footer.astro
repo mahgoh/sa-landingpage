@@ -1,7 +1,21 @@
+---
+const links = [
+  { href: '/', label: 'Solution' },
+  { href: '/waitlist', label: 'Waitlist' },
+  { href: '/login', label: 'Login' },
+]
+---
+
 <footer>
   <div class="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
     <div class="flex justify-center space-x-6 md:order-2">
-      <a href="/waitlist" class="text-gray-400 hover:text-gray-500">Waitlist</a>
+      {
+        links.map(({ href, label }) => (
+          <a href={href} class="text-gray-400 text-sm hover:text-gray-500">
+            {label}
+          </a>
+        ))
+      }
     </div>
     <div class="mt-8 md:order-1 md:mt-0">
       <p class="text-center text-xs leading-5 text-gray-500">
