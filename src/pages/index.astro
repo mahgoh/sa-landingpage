@@ -3,21 +3,17 @@ import Layout from '../layouts/Layout.astro'
 import Header from '../components/Header.astro'
 import Eric from '../components/Eric.astro'
 import Anna from '../components/Anna.astro'
-import Join from '../components/Join.astro'
+import Footer from '../components/Footer.astro'
 ---
 
 <Layout title="NeighborhoodFinder">
-  <Header
-    title="NeighborhoodFinder"
-    subtitle="Discover the perfect place to call home with our platform that simplifies your search for the right neighborhood. Powered by data from public transport, shopping, weather, and more, we consolidate vital information from multiple sources into one easy-to-use interface. Plus, connect with a community of locals who share reviews and personal experiences to help you find a neighborhood that suits your lifestyle. Whether it’s quiet streets or vibrant nightlife, explore neighborhoods promoted by people like you."
-    tagline="Everything to know about your future neighborhood"
-  />
-
-  <!-- Use these attributes on anchor tags to start hidden decision path. Already used in Anna and Eric component. -->
-  <!-- <a class="join" data-path="eric" href="#join">Eric</a> -->
-  <!-- <a class="join" data-path="anna" href="#join">Anna</a> -->
-
-  <Eric />
-  <Anna />
-  <Join />
+  <main>
+    <Header
+      title="NeighborhoodFinder"
+      subtitle="Discover the perfect place to call home with our platform that simplifies your search for the right neighborhood. Powered by data from public transport, shopping, weather, and more, we consolidate vital information from multiple sources into one easy-to-use interface. Plus, connect with a community of locals who share reviews and personal experiences to help you find a neighborhood that suits your lifestyle. Whether it's quiet streets or vibrant nightlife, explore neighborhoods promoted by people like you."
+    />
+    <Eric />
+    <Anna />
+    <Footer />
+  </main>
 </Layout>

@@ -2,13 +2,12 @@
 interface Props {
   title: string
   subtitle: string
-  tagline: string
 }
 
-const { title, subtitle, tagline } = Astro.props
+const { title, subtitle } = Astro.props
 ---
 
-<div class="bg-white px-6 py-24 sm:py-32 lg:px-56">
+<div class="px-6 py-24 sm:py-32 lg:px-56">
   <div class="max-w-2xl text-left">
     <h2
       class="mt-2 text-5xl sm:text-6xl font-bold tracking-tight text-gray-900 md:text-7xl text-left"
@@ -20,14 +19,25 @@ const { title, subtitle, tagline } = Astro.props
     </h2>
     <p class="my-8 text-lg leading-8 text-gray-600">{subtitle}</p>
     <a
-      href="#join"
-      class="join flex-none text-lg rounded-full border-2 border-blue-600 bg-white px-7 py-3 font-semibold text-blue-600 shadow-sm hover:bg-blue-600 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors"
-      >Join waitlist</a
+      href="/waitlist"
+      class="join group inline-flex items-center text-lg rounded-full bg-blue-600 px-8 py-4 font-semibold text-white shadow-sm hover:bg-blue-950 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors hover:shadow-md"
+      transition:name="join"
+      >Join waitlist <svg
+        class="block ml-4 -mr-1 stroke-2 stroke-white scale-150"
+        fill="none"
+        width="10"
+        height="10"
+        viewBox="0 0 10 10"
+        aria-hidden="true"
+        ><path class="opacity-0 transition group-hover:opacity-100" d="M0 5h7"></path><path
+          class="transition group-hover:translate-x-[3px]"
+          d="M1 1l4 4-4 4"></path></svg
+      ></a
     >
 
     <div
       id="scroll-down"
-      class="fixed left-0 bottom-20 flex justify-center items-center gap-2 text-center w-full opacity-100 transition-opacity duration-500 animate-bounce text-lg"
+      class="fixed left-0 bottom-36 flex justify-center items-center gap-2 text-center w-full opacity-100 transition-opacity duration-500 animate-bounce text-lg"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

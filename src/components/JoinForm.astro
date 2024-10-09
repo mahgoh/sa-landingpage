@@ -1,0 +1,104 @@
+---
+import Input from './Input.astro'
+---
+
+<div>
+  <div class="mx-auto max-w-md relative isolate overflow-hidden px-6 sm:pt-10 sm:pb-20">
+    <form class="mx-auto grid sm:grid-cols-2 max-w-md gap-4">
+      <div class="sm:col-span-2">
+        <Input
+          type="email"
+          name="email"
+          label="Email*"
+          placeholder="hello@neighborhoodfinder.ch"
+          autocomplete="email"
+          required
+        />
+      </div>
+      <Input
+        type="number"
+        name="postalcode"
+        label="Postal code*"
+        placeholder="XXXX"
+        autocomplete="postal-code"
+        required
+      />
+      <di v>
+        <label for="contributor" class="block text-sm font-medium leading-6 text-gray-900"
+          >Preference*</label
+        >
+        <select
+          id="contributor"
+          name="contributor"
+          class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+        >
+          <option value="false" selected>I only want to see neighborhoods</option>
+          <option value="true">I'm happy to also contribute with a review</option>
+        </select>
+      </di>
+      <button
+        type="submit"
+        class="mt-2 sm:col-span-2 flex-none rounded-full bg-blue-600 px-3.5 py-2.5 font-semibold text-white shadow-sm hover:bg-blue-600/20 hover:text-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors"
+        >Join</button
+      >
+      <a
+        href="/"
+        class="group inline-flex justify-center items-center mt-2 sm:col-span-2 font-bold text-gray-700 text-center w-full"
+        ><svg
+          class="block mr-4 -ml-1 rotate-180 stroke-2 stroke-gray-700 scale-150"
+          fill="none"
+          width="10"
+          height="10"
+          viewBox="0 0 10 10"
+          aria-hidden="true"
+          ><path class="opacity-0 transition group-hover:opacity-100" d="M0 5h7"></path><path
+            class="transition group-hover:translate-x-[3px]"
+            d="M1 1l4 4-4 4"></path></svg
+        > Back</a
+      >
+      <div
+        id="thank-you-bubble"
+        class="fixed bottom-20 left-1/2 z-10 -translate-x-1/2 rounded-full bg-blue-600 p-4 text-white text-center hidden"
+      >
+        Thank you! We'll soon get back to you!
+      </div>
+    </form>
+  </div>
+</div>
+
+<script is:inline>
+  document.querySelector('form')?.addEventListener('submit', async (e) => {
+    e.preventDefault()
+
+    const email = e.target.elements.email.value
+    const postalcode = e.target.elements.postalcode.value
+    const contributor = e.target.elements.contributor.value
+
+    const entry = {
+      email,
+      postalcode,
+      contributor: contributor === 'true',
+    }
+    const headers = new Headers()
+    headers.append('Content-Type', 'application/json')
+
+    const requestOptions = {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(entry),
+    }
+
+    fetch('https://api.sa.mcs.marcokaufmann.ch/api/collections/signups/records/', requestOptions)
+      .then((response) => response.json())
+      .then((_) => {
+        console.log('Waitlist joined.')
+
+        const bubble = document.getElementById('thank-you-bubble')
+        bubble.classList.remove('hidden')
+        setTimeout(() => bubble.classList.add('hidden'), 5000)
+      })
+      .catch((error) => console.error(error))
+
+    e.target.reset()
+  })
+</script>
