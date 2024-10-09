@@ -1,14 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import Header from '../components/Header.astro'
+import Hero from '../components/Hero.astro'
 import Eric from '../components/Eric.astro'
 import Anna from '../components/Anna.astro'
 import Footer from '../components/Footer.astro'
+import Header from '../components/Header.astro'
 ---
 
 <Layout title="NeighborhoodFinder">
+  <div class="opacity-0 transition-all" id="header-container">
+    <Header active="/" />
+  </div>
   <main>
-    <Header
+    <Hero
       title="NeighborhoodFinder"
       subtitle="Discover the perfect place to call home with our platform that simplifies your search for the right neighborhood. Powered by data from public transport, shopping, weather, and more, we consolidate vital information from multiple sources into one easy-to-use interface. Plus, connect with a community of locals who share reviews and personal experiences to help you find a neighborhood that suits your lifestyle. Whether it's quiet streets or vibrant nightlife, explore neighborhoods promoted by people like you."
     />
@@ -17,3 +21,14 @@ import Footer from '../components/Footer.astro'
     <Footer />
   </main>
 </Layout>
+
+<script is:inline>
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 650) {
+      document.querySelector('#header-container').classList.replace('opacity-0', 'opacity-100')
+    } else {
+      document.querySelector('#header-container').classList.replace('opacity-100', 'opacity-0')
+      // document.querySelector('#scroll-down').classList.replace('opacity-0', 'opacity-100')
+    }
+  })
+</script>

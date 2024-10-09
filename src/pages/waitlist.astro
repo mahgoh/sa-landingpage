@@ -1,10 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import JoinForm from '../components/JoinForm.astro'
+import Header from '../components/Header.astro'
 ---
 
 <Layout title="NeighborhoodFinder">
   <div class="min-h-screen w-full flex flex-col">
+    <!-- <div class="mx-auto w-full flex items-center justify-between px-6 sm:px-16 md:px-20 pt-10">
+    </div> -->
+    <Header active="/waitlist" />
     <div
       class="bg-white flex-grow rounded-t-[3rem] border m-6 sm:m-16 md:m-20 mb-0 sm:mb-0 md:mb-0"
     >

@@ -1,0 +1,62 @@
+---
+import Logo from './Logo.astro'
+
+interface Props {
+  title: string
+  subtitle: string
+}
+
+const { title, subtitle } = Astro.props
+---
+
+<div class="px-6 py-24 sm:py-32 lg:px-56">
+  <div class="max-w-2xl text-left">
+    <Logo />
+    <p class="my-8 text-lg leading-8 text-gray-600">{subtitle}</p>
+    <a
+      href="/waitlist"
+      class="join group inline-flex items-center text-lg rounded-full bg-blue-600 px-8 py-4 font-semibold text-white shadow-sm hover:bg-blue-950 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors hover:shadow-md"
+      transition:name="join"
+      >Join waitlist <svg
+        class="block ml-4 -mr-1 stroke-2 stroke-white scale-150"
+        fill="none"
+        width="10"
+        height="10"
+        viewBox="0 0 10 10"
+        aria-hidden="true"
+        ><path class="opacity-0 transition group-hover:opacity-100" d="M0 5h7"></path><path
+          class="transition group-hover:translate-x-[3px]"
+          d="M1 1l4 4-4 4"></path></svg
+      ></a
+    >
+
+    <div
+      id="scroll-down"
+      class="fixed left-0 bottom-36 flex justify-center items-center gap-2 text-center w-full opacity-100 transition-opacity duration-500 animate-bounce text-lg"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="w-7 h-7 text-blue-600"
+        ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M7 7l5 5l5 -5"
+        ></path><path d="M7 13l5 5l5 -5"></path></svg
+      > scroll to learn more
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  // When screen is scrolled more than 50, hide the button using event listener
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      document.querySelector('#scroll-down').classList.replace('opacity-100', 'opacity-0')
+    } else {
+      document.querySelector('#scroll-down').classList.replace('opacity-0', 'opacity-100')
+    }
+  })
+</script>
