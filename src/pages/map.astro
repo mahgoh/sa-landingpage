@@ -1,0 +1,59 @@
+---
+
+---
+
+<!-- add MapLibre JavaScript and CSS -->
+<script is:inline src="https://tiles.versatiles.org/assets/maplibre-gl/maplibre-gl.js"></script>
+<link href="https://tiles.versatiles.org/assets/maplibre-gl/maplibre-gl.css" rel="stylesheet" />
+
+<!-- add container for the map -->
+<div class="p-2 flex items-center gap-2">
+  <span class="inline-block w-5 h-5" style="background-color:#ffdd00"></span> Bike Parkings
+  <span class="inline-block w-5 h-5" style="background-color:#ff00dd"></span> Park+Rail
+</div>
+<div id="map" style="width:100%;aspect-ratio:16/9"></div>
+
+<!-- start map -->
+<script is:inline>
+  let center = new maplibregl.LngLat(9.37477, 47.42391)
+  let bounds = maplibregl.LngLatBounds.fromLngLat(center, 3000).toArray()
+
+  let map = new maplibregl.Map({
+    container: 'map',
+    style: 'https://tiles.versatiles.org/assets/styles/colorful.json',
+    center: [9.37477, 47.42391],
+    zoom: 14,
+  }).addControl(new maplibregl.NavigationControl())
+
+  // map.setMaxBounds(bounds)
+
+  let marker = new maplibregl.Marker({
+    color: '#333333',
+  })
+    .setLngLat([9.37477, 47.42391])
+    .addTo(map)
+
+  // new maplibregl.Marker({
+  //   color: '#ffdd00',
+  // })
+  //   .setLngLat([9.367938, 47.422815])
+  //   .addTo(map)
+
+  fetchAndAddMarkers('/markers/bike.json', '#ffdd00')
+  fetchAndAddMarkers('/markers/parking.json', '#dd00ff')
+
+  function fetchAndAddMarkers(url, color) {
+    fetch(url)
+      .then((response) => response.json())
+      .then((markers) => {
+        markers.forEach((marker) => {
+          new maplibregl.Marker({
+            color,
+          })
+            .setLngLat(marker)
+            .addTo(map)
+        })
+      })
+      .catch((error) => console.error(error))
+  }
+</script>
