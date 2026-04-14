@@ -90,7 +90,7 @@ import Input from './Input.astro'
       body: JSON.stringify(entry),
     }
 
-    fetch('https://api.sa.mcs.marcokaufmann.ch/api/collections/signups/records/', requestOptions)
+    fetch('https://sandpocket.p.flvr.ch/api/collections/signups/records/', requestOptions)
       .then((response) => response.json())
       .then((_) => {
         console.log('Waitlist joined.')
